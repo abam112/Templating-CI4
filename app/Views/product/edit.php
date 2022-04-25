@@ -6,12 +6,15 @@
 </head>
 
 
-<body class="container">
+<body class="container"> 
 <main role="main" class="container">
 
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col-12">
+
+        <a href="/product/">kembali ke halaman list product</a>
+            <br><br>
 
             <form action="/product/<?= $data['id'] ?>/update" method="post">
                 <input type="hidden" name="_method" value="put" />
@@ -38,6 +41,11 @@
                             <option value="food_and_beverages" <?php $data['category'] == "food_and_beverages" ? "selected" : "" ?>> Food & Beverages</option>
                             <option value="books" <?php $data['category'] == "books" ? "selected" : "" ?>>Books</option>
                         </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="example-product-photo">Photo</label>
+                    <input type="file" class="form-control" id="example-product-photo" aria-describedby="photoHelp" name="photo">
                 </div>
 
                 <div class="mb-3">

@@ -1,72 +1,60 @@
 <?= $this->extend('base') ?>
 <?= $this->section('content') ?>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h5 class="mb-4">Hello <?= session('name') ?> </h5>
 
-<br>
-<br>
+            <h5 class="mb-4">Daftar Produk</h5>
 
-<head>
-
-</head>
-
-
-<body class="container">
-<main role="main " class="container">
-
-
-<figure class="text-center">
-    <blockquote class="blockquote">
-    <p>Ingin menambahkan barang? Klik tombol dibawah!</p>
-    </blockquote>
-  
-    <blockquote class="blockquote">
-    <a href="/product/new"><button type="button" class="btn btn-success">Add new product</button></a>
-    </blockquote>
-</figure>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-
-    <table class="table">
-      <thead class="thead-dark">
-          <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Price</th>
-                <th scope="col">Category</th>
-                <th scope="col">Action</th>
-          </tr>
-      </thead>
-
-      <tbody>
-        <?php $no = 0; ?>
-        <?php foreach ($products as $item): ?>
-          <tr>
-                <td><?= $no += 1; ?></td>
-                <td><?= $item['name'] ?></td>
-                <td><?= $item['stock'] ?></td>
-                <td><?= $item['price'] ?></td>
-                <td><?= $item['category'] ?></td>
-                <td>
-                  <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="/product/<?= $item['id'] ?>/edit"<button type="button" class="btn btn-outline-info">Edit</button></a>
-
-                    <form action="/product/<?= $item['id'] ?>" method="post" onsubmit="return confirm(`Are you sure?`)">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                    </form>
-                  </div>
-                </td>
-          </tr>
-        
-        <?php endforeach ?>
-  </tbody>
-</table>
-
+            <?php if(session()->getFlashdata('pesan')) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?= session()->getFlashdata('pesan'); ?>
+                </div>
+            <?php endif; ?>
+            
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th scope="col ">ID</th>
+                        <th scope="col ">Product Name</th>
+                        <th scope="col ">Stock</th>
+                        <th scope="col ">Price</th>
+                        <th scope="col ">Category</th>
+                        <th scope="col ">Photo</th>
+                        <th scope="col ">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 0; ?>
+                    <?php foreach ($products as $item): ?>
+                    <tr>
+                        <td><?= $no += 1; ?></td>
+                        <td><?= $item['name'] ?></td>
+                        <td><?= $item['stock'] ?></td>
+                        <td><?= $item['price'] ?></td>
+                        <td><?= $item['category'] ?></td>
+                        <td><img src="/photos/<?= $item['photo'] ?>" alt="" width=100 height=100></td>
+                        <td>
+                            <div class="btn-group " role="group " aria-label="Basic example ">
+                                <form action="/product/<?= $item['id'] ?>" method="POST" onsubmit="return confirm(`Are you sure?`)">
+                                    <a href="/product/<?= $item['id'] ?>/edit" class="btn btn-info text-white "><i class='bx bx-pencil'></i></a>
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button class="btn btn-danger text-white" type="submit">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <?= $pager->links('products', 'custom_pagination') ?>
+        </div>
+        <a href="/Product/new" class="btn btn-primary "><i>Tambah Product</i></a>
     </div>
-  </div>
 </div>
-</body>
 <?= $this->endSection() ?>

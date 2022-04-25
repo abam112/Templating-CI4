@@ -1,47 +1,51 @@
 <?= $this->extend('base') ?>
 <?= $this->section('content') ?>
-
-
-<body>
-
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col-12">
-            <form action="/product/create" method="post">
+            <h5 class="mb-4">Create new product</h5>
 
-                    <div class="mb-3">
-                    <label for="name">Product Name</label>
-                    <input type="text" class="form-control" id="crt" placeholder="input product name" name="name">
-                    </div>
+            <a href="/product/">kembali ke halaman list product</a>
+            <br><br>
+            
 
-                    <div class="mb-3">
-                    <label for="stock">Stock</label>
-                    <input type="number" class="form-control" min="1" id="stock" placeholder="Input product stock" name="stock" />
-                    </div>
+            <form action="/Product/create/" method="post" enctype="multipart/form-data">
 
-                    <div class="mb-3">
-                    <label for="price">Price</label>
-                    <input type="number" class="form-control" min="0" id="price" placeholder="Input product price" name="price" />
-                    </div>
+                <div class="form-group">
+                    <label for="example-product-name">Product Name</label>
+                    <input type="text" class="form-control" id="example-product-name" aria-describedby="emailHelp" 
+                        placeholder="Enter product name" required name="name">
+                </div>
 
-                    <div class="mb-3">
-                    <label for="category">Category</label>
-                        <select name="category" id="category">
-                            <option value="utilities">Utilities</option>
-                            <option value="food_and_beverages">Food & Beverages</option>
-                            <option value="books">Books</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="example-product-stock">Stock</label>
+                    <input type="number" min="1" class="form-control" id="example-product-stock" aria-describedby="emailHelp" 
+                        placeholder="Enter product stock" required name="stock">
+                </div>
 
-                    <div class="mb-3">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
+                <div class="form-group">
+                    <label for="example-product-price">Price</label>
+                    <input type="number" min="1" class="form-control" id="example-product-price" aria-describedby="emailHelp" 
+                        placeholder="Enter product price" required name="price">
+                </div>
 
+                <div class="form-group">
+                    <label for="example-product-category">Category</label>
+                    <select class="form-control" name="category" id="example-product-category">
+                        <option value="utilities">Utilities</option>
+                        <option value="food_and_beverages"> Food & Beverages</option>
+                        <option value="books">Books</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="example-product-photo">Photo</label>
+                    <input type="file" class="form-control" id="example-product-photo" aria-describedby="photoHelp" name="photo">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-    
         </div>
     </div>
 </div>
-
-</body>
 <?= $this->endSection() ?>
